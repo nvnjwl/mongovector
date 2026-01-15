@@ -37,6 +37,7 @@ Rules:
 - If nothing is worth remembering: return []
 - summary must be short (<= 120 chars)
 - importance: preference/identity/project=0.7-1.0, small info=0.2-0.6
+- type must be one of: preference, fact, goal, relationship, project, note, education
 `;
 
   const resp = await openai.chat.completions.create({

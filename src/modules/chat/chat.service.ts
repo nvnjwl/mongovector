@@ -6,6 +6,7 @@ import { extractMemoriesFromMessage } from '../memory/memory.extractor';
 import { MemoryModel } from '../../models/Memory';
 import { vectorSearchMemories, touchMemories } from '../memory/memory.service';
 import { buildSystemPrompt } from './prompt.builder';
+import { normalizeMemoryType } from '../memory/memory.types';
 
 const openai = new OpenAI({ apiKey: env.openaiKey });
 
@@ -30,7 +31,7 @@ export async function chatWithMemory(input: {
       const emb = await embedText(mem.summary);
       await MemoryModel.create({
         userId: input.userId,
-        type: mem.type,
+        type: normalizeMemoryType(mem.type),
         text: mem.rawText,
         summary: mem.summary,
         tags: mem.tags ?? [],

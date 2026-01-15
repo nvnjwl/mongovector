@@ -4,7 +4,8 @@ export type MemoryType =
   | 'goal'
   | 'relationship'
   | 'project'
-  | 'note';
+  | 'note'
+  | 'education';
 
 export const memoryTypes: MemoryType[] = [
   'preference',
@@ -13,4 +14,10 @@ export const memoryTypes: MemoryType[] = [
   'relationship',
   'project',
   'note',
+  'education',
 ];
+
+export function normalizeMemoryType(type: string | undefined): MemoryType {
+  if (!type) return 'note';
+  return memoryTypes.includes(type as MemoryType) ? (type as MemoryType) : 'note';
+}
